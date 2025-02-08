@@ -1,71 +1,34 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react"
+import { ShoppingCart } from "lucide-react"
+import type { Product } from "../data/products"
 
-const Cart = () => {
-  const [cart, setCart] = useState([]);
-  const router = useRouter();
+export default function AddToCartButton({ product }: { product: Product }) {
+  const [isAdded, setIsAdded] = useState(false)
 
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(storedCart);
-  }, []);
-
-  useEffect(() => {
-    if (cart.length > 0) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  }, [cart]);
-
-  const updateQuantity = (index, amount) => {
-    setCart(prevCart => {
-      const newCart = prevCart.map((item, i) =>
-        i === index ? { ...item, quantity: Math.max(1, item.quantity + amount) } : item
-      );
-      return newCart;
-    });
-  };
-
-  const removeItem = (index) => {
-    setCart(prevCart => prevCart.filter((_, i) => i !== index));
-  };
-
-  const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-  };
-
-  const handleBuyNow = () => {
-    const orderDetails = cart.map(item => `${item.name} x${item.quantity}`).join("%0A");
-    const whatsappURL = `https://wa.me/919949683222?text=Order%20Details:%0A${orderDetails}%0ATotal:%20$${getTotalPrice()}`;
-    window.open(whatsappURL, "_blank");
-  };
+  const handleAddToCart = () => {
+    // Here you would typically add the product to the cart state or send a request to an API
+    setIsAdded(true)
+    setTimeout(() => setIsAdded(false), 2000)
+  }
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+    <button
+      onClick={handleAddToCart}
+      className={`flex items-center justify-center px-4 py-2 rounded-md text-white ${
+        isAdded ? "bg-green-500" : "bg-pink-600 hover:bg-pink-700"
+      } transition-colors duration-300`}
+    >
+      {isAdded ? (
+        "Added to Cart!"
       ) : (
-        <div>
-          {cart.map((item, index) => (
-            <div key={index} className="flex justify-between items-center border-b py-2">
-              <p>{item.name}</p>
-              <div className="flex items-center">
-                <button onClick={() => updateQuantity(index, -1)} className="px-2">-</button>
-                <span className="px-4">{item.quantity}</span>
-                <button onClick={() => updateQuantity(index, 1)} className="px-2">+</button>
-              </div>
-              <p>${(item.price * item.quantity).toFixed(2)}</p>
-              <button onClick={() => removeItem(index)} className="text-red-500">Remove</button>
-            </div>
-          ))}
-          <h3 className="text-xl font-bold mt-4">Total: ${getTotalPrice()}</h3>
-          <button onClick={handleBuyNow} className="bg-green-500 text-white px-4 py-2 mt-4">Buy Now on WhatsApp</button>
-        </div>
+        <>
+          <ShoppingCart className="w-5 h-5 mr-2" />
+          Add to Cart
+        </>
       )}
-    </div>
-  );
-};
+    </button>
+  )
+}
 
-export default Cart;
