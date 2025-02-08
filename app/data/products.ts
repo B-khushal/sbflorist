@@ -12,7 +12,7 @@ export const products: Product[] = [
     name: "Rose Bouquet",
     description: "A beautiful bouquet of fresh roses",
     price: 29.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/img1.webp",
   },
   {
     id: 2,
