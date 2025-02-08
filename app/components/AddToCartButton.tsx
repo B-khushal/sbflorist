@@ -1,17 +1,26 @@
 "use client"
 
-import { useState } from "react"
-import { ShoppingCart } from "lucide-react"
-import type { Product } from "../data/products"
+import { useState } from "react";
+import { ShoppingCart } from "lucide-react";
+import type { Product } from "../data/products";
 
 export default function AddToCartButton({ product }: { product: Product }) {
-  const [isAdded, setIsAdded] = useState(false)
+  const [isAdded, setIsAdded] = useState(false);
 
   const handleAddToCart = () => {
-    // Here you would typically add the product to the cart state or send a request to an API
-    setIsAdded(true)
-    setTimeout(() => setIsAdded(false), 2000)
-  }
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingProduct = storedCart.find((item: Product) => item.id === product.id);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      storedCart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(storedCart));
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
+  };
 
   return (
     <button
@@ -29,6 +38,5 @@ export default function AddToCartButton({ product }: { product: Product }) {
         </>
       )}
     </button>
-  )
+  );
 }
-
