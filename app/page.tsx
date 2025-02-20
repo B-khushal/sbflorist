@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 
 const featuredProducts = [
-  { id: 1, name: "Spring Bouquet", price: 49.99, image: <image src="./img/1.jpg" ></image>},
+  { id: 1, name: "Spring Bouquet", price: 49.99, image: "./img/1.jpg"},
   { id: 2, name: "Rose Arrangement", price: 59.99, image: "/placeholder.svg" },
   { id: 3, name: "Tulip Collection", price: 39.99, image: "/placeholder.svg" },
 ]
