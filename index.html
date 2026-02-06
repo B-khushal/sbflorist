@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love in Bloom | Spring Blossoms Florist</title>
+    <meta name="description" content="Spring Blossoms Florist - Celebrating Valentine's Day with Fresh Flowers for Every Emotion. Pre-order your romantic bouquets now at sbflorist.in.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'valentine-red': '#880808',
+                        'valentine-crimson': '#DC143C',
+                        'blush-pink': '#FFF0F5',
+                        'rose-petal': '#F8BBD0',
+                        'soft-gold': '#D4AF37',
+                        'brand-pink': '#d48d9a',
+                        'brand-green': '#618a6c',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'petal-fall': 'petalFall 12s linear infinite',
+                        'heart-pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(15px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(2deg)' },
+                        },
+                        petalFall: {
+                            '0%': { transform: 'translateY(-10vh) translateX(0) rotate(0deg)', opacity: '0' },
+                            '10%': { opacity: '0.6' },
+                            '90%': { opacity: '0.6' },
+                            '100%': { transform: 'translateY(110vh) translateX(120px) rotate(720deg)', opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-[#FFF9F9] text-stone-800 font-sans overflow-x-hidden">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
